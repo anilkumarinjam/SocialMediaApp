@@ -8,10 +8,13 @@ import {
   getAllUsers,
   userDetails,
   updateUser,
+  getFriends
 } from '../controllers/user.controllers.js';
+
 
 const router = express.Router();
 
+router.get('/friends', fetchUser, getFriends); // Add this route
 // Route to register a new user
 router.post('/register', registerUser);
 

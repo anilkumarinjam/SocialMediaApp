@@ -73,6 +73,17 @@ export const registerUser = asyncHandler(async (req, res, next) => {
   return res.status(201).json(new ApiResponse(201, 'User registered successfully', { id: user._id }));
 });
 
+export const getFriends = asyncHandler(async (req, res, next) => {
+  const userId = req.user.id;
+
+  const user = await User.findById(userId).populate('friends', 'fullName username profilePicture');
+  if (!user) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+
+  res.status(200).json({ data: user.friends });
+});
+
 // Login a user
 export const loginUser = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;

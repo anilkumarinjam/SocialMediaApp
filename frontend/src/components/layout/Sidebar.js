@@ -345,6 +345,11 @@ const menuItems = [
     iconSrc: 'https://cdn-icons-png.flaticon.com/512/15430/15430330.png',
   },
   {
+    label: 'Chat', // Add this new menu item
+    href: '/chat',
+    iconSrc: 'https://cdn-icons-png.flaticon.com/512/2462/2462719.png', // Replace with your desired chat icon
+  },
+  {
     label: 'Pending Requests',
     href: '/pending-requests',
     iconSrc: 'https://cdn-icons-png.flaticon.com/512/5509/5509916.png',
