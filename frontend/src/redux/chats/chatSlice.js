@@ -31,6 +31,16 @@ export const sendMessage = createAsyncThunk('chats/sendMessage', async ({ chatId
   }
 });
 
+// Create a new chat
+export const createChat = createAsyncThunk('chats/createChat', async ({ friendId }, { rejectWithValue }) => {
+  try {
+    const response = await axiosInstance.post('/chats', { participantId: friendId }); // Use participantId
+    return response.data.data; // Assuming the API returns the new chat object
+  } catch (error) {
+    return rejectWithValue(error.response.data);
+  }
+});
+
 const chatSlice = createSlice({
   name: 'chats',
   initialState: {
@@ -49,17 +59,13 @@ const chatSlice = createSlice({
         state.messages[action.payload.chatId] = action.payload.messages;
       })
       .addCase(sendMessage.fulfilled, (state, action) => {
-        console.log('Action payload:', action.payload);
-        console.log('Current state.messages:', JSON.stringify(state.messages, null, 2));
-      
         if (!state.messages[action.payload.chatId]) {
-          state.messages = {
-            ...state.messages,
-            [action.payload.chatId]: [],
-          };
+          state.messages[action.payload.chatId] = [];
         }
-      
         state.messages[action.payload.chatId].push(action.payload.message);
+      })
+      .addCase(createChat.fulfilled, (state, action) => {
+        state.chats.push(action.payload); // Add the new chat to the chats array
       });
   },
 });

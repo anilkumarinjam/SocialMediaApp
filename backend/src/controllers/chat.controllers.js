@@ -5,8 +5,12 @@ import { asyncHandler } from '../utils/asyncHandler.js';
 
 
 export const createChat = asyncHandler(async (req, res, next) => {
-  const userId = req.user.id;
-  const { participantId } = req.body;
+  const userId = req.user.id; // Current user ID
+  const { participantId } = req.body; // Friend's ID
+
+  if (!participantId) {
+    return res.status(400).json({ message: 'Participant ID is required' });
+  }
 
   // Check if a chat already exists
   let chat = await Chat.findOne({
@@ -16,7 +20,7 @@ export const createChat = asyncHandler(async (req, res, next) => {
   if (!chat) {
     // Create a new chat
     chat = new Chat({
-      participants: [userId, participantId],
+      participants: [userId, participantId], // Ensure both participants are added
       messages: [],
     });
     await chat.save();

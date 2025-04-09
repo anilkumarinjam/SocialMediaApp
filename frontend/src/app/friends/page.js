@@ -51,15 +51,18 @@ const FriendsList = () => {
     });
   };
 
+
   // Filter friends by search term
   const filteredFriends = friends.filter(friend => {
-    return friend.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      friend.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (friend.bio && friend.bio.toLowerCase().includes(searchTerm.toLowerCase()));
+    return (
+      (friend.fullName?.toLowerCase().includes(searchTerm.toLowerCase()) || '') ||
+      (friend.username?.toLowerCase().includes(searchTerm.toLowerCase()) || '') ||
+      (friend.bio?.toLowerCase().includes(searchTerm.toLowerCase()) || '')
+    );
   }).sort((a, b) => {
     // Sort according to selected sort criteria
-    if (sortBy === 'name') return a.fullName.localeCompare(b.fullName);
-    if (sortBy === 'username') return a.username.localeCompare(b.username);
+    if (sortBy === 'name') return a.fullName?.localeCompare(b.fullName || '');
+    if (sortBy === 'username') return a.username?.localeCompare(b.username || '');
     if (sortBy === 'recent') return new Date(b.createdAt) - new Date(a.createdAt);
     return 0;
   });
