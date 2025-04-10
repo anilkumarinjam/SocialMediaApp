@@ -88,16 +88,8 @@ const Rightbar = () => {
                   <div className="absolute -right-4 -top-4 w-24 h-24 bg-white/10 rounded-full"></div>
                   <div className="absolute -right-1 -bottom-4 w-16 h-16 bg-white/10 rounded-full"></div>
 
-                  <h4 className="font-bold text-sm mb-1">Try Premium Features</h4>
-                  <p className="text-xs text-white/80 mb-2">Get unlimited access to all features</p>
-
-                  <motion.button
-                    className="w-full py-1.5 bg-white text-blue-600 rounded-lg text-xs font-semibold hover:bg-opacity-90 transition"
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
-                  >
-                    Upgrade Now
-                  </motion.button>
+                  <h4 className="font-bold text-sm mb-1">New AI Features Coming Soon</h4>
+                  <p className="text-xs text-white/80 mb-2">Free access to all features</p>
                 </motion.div>
               </div>
 
@@ -119,7 +111,7 @@ const Rightbar = () => {
                     </Link>
                   </motion.div>
                   <motion.div variants={itemVariants}>
-                    <Link href="/explore" className="flex items-center gap-3 hover:bg-white p-2 rounded-lg cursor-pointer transition-all duration-300 group">
+                    <Link href="/my-posts" className="flex items-center gap-3 hover:bg-white p-2 rounded-lg cursor-pointer transition-all duration-300 group">
                       <div className="bg-blue-100 p-2 rounded-lg text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
                         <FiCompass />
                       </div>
@@ -127,15 +119,7 @@ const Rightbar = () => {
                     </Link>
                   </motion.div>
                   <motion.div variants={itemVariants}>
-                    <Link href="/trending" className="flex items-center gap-3 hover:bg-white p-2 rounded-lg cursor-pointer transition-all duration-300 group">
-                      <div className="bg-green-100 p-2 rounded-lg text-green-600 group-hover:bg-green-600 group-hover:text-white transition-all duration-300">
-                        <FiTrendingUp />
-                      </div>
-                      <span className="text-gray-700 group-hover:text-gray-900 font-medium">Trending</span>
-                    </Link>
-                  </motion.div>
-                  <motion.div variants={itemVariants}>
-                    <Link href="/saved" className="flex items-center gap-3 hover:bg-white p-2 rounded-lg cursor-pointer transition-all duration-300 group">
+                    <Link href="/my-posts" className="flex items-center gap-3 hover:bg-white p-2 rounded-lg cursor-pointer transition-all duration-300 group">
                       <div className="bg-amber-100 p-2 rounded-lg text-amber-600 group-hover:bg-amber-600 group-hover:text-white transition-all duration-300">
                         <BsBookmark />
                       </div>
@@ -153,7 +137,7 @@ const Rightbar = () => {
                 </motion.div>
               </motion.div>
 
-              {/* Trending Hashtags */}
+              {/* Trending Hashtags
               <div className="bg-gray-50 rounded-xl p-3">
                 <div className="flex items-center justify-between mb-3">
                   <h4 className="text-md font-semibold text-gray-800 px-2">Trending Tags</h4>
@@ -188,7 +172,7 @@ const Rightbar = () => {
                     {showMoreTags ? "Show Less" : "Show More"}
                   </button>
                 </motion.div>
-              </div>
+              </div> */}
 
               {/* Upcoming Events */}
               {/* <div className="bg-gray-50 rounded-xl p-3">

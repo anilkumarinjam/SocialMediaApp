@@ -4,46 +4,16 @@ import { FaLinkedin, FaGithub, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
 export default function ContactPage() {
   const socialMedia = [
-    {
-      name: 'LinkedIn',
-      link: 'https://www.linkedin.com/in/rehman-nry',
-      icon: <FaLinkedin className="text-[#0A66C2] text-3xl" />,
-      description: 'Lets connect professionally.',
-      username: 'rehman-nry',
-      color: 'from-[#0A66C2]/10 to-[#0A66C2]/30',
-      hoverColor: 'hover:border-[#0A66C2]',
-      iconBg: 'bg-[#0A66C2]/10',
-    },
-    {
-      name: 'GitHub',
-      link: 'https://github.com/rehmanNRY',
-      icon: <FaGithub className="text-[#181717] text-3xl" />,
-      description: 'Check out my code and repositories.',
-      username: 'rehmanNRY',
-      color: 'from-[#181717]/10 to-[#181717]/30',
-      hoverColor: 'hover:border-[#181717]',
-      iconBg: 'bg-[#181717]/10',
-    },
-    {
-      name: 'Instagram',
-      link: 'https://www.instagram.com/rehman_nry/',
-      icon: <FaInstagram className="text-[#C13584] text-3xl" />,
-      description: 'Get a glimpse of my visual life.',
-      username: 'rehman_nry',
-      color: 'from-[#C13584]/10 to-[#C13584]/30',
-      hoverColor: 'hover:border-[#C13584]',
-      iconBg: 'bg-[#C13584]/10',
-    },
-    {
-      name: 'WhatsApp',
-      link: 'https://wa.link/fcyw8d',
-      icon: <FaWhatsapp className="text-[#25D366] text-3xl" />,
-      description: "Let's talk about programming!",
-      username: '923014340329',
-      color: 'from-[#25D366]/10 to-[#25D366]/30',
-      hoverColor: 'hover:border-[#25D366]',
-      iconBg: 'bg-[#25D366]/10',
-    },
+    // {
+    //   name: 'GitHub',
+    //   link: 'https://github.com',
+    //   icon: <FaGithub className="text-[#181717] text-3xl" />,
+    //   description: 'Check out the source code.',
+    //   username: 'xxxxxx',
+    //   color: 'from-[#181717]/10 to-[#181717]/30',
+    //   hoverColor: 'hover:border-[#181717]',
+    //   iconBg: 'bg-[#181717]/10',
+    // },
   ];
 
   return (
@@ -96,22 +66,6 @@ export default function ContactPage() {
             ))}
           </div>
           
-          <div className="mt-16">
-            <button 
-              className="relative"
-            >
-              <a 
-                target='_blank' 
-                href="https://rehman-nry.netlify.app/" 
-                className="px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-full shadow-lg hover:shadow-blue-500/30 transition-all duration-300 flex items-center"
-              >
-                Visit Portfolio
-                <span className='ml-2'>
-                  <FiExternalLink />
-                </span>
-              </a>
-            </button>
-          </div>
         </div>
       </main>
     </AuthRedirect>

@@ -80,7 +80,7 @@ const Header = ({ toggleSidebar }) => {
                   className="relative"
                 >
                   <img
-                    src="/images/rehman_logo.png"
+                    src="/images/logo.png"
                     alt="Logo"
                     className="w-9 h-9 rounded-lg mr-2 z-10 relative drop-shadow-md"
                   />
@@ -171,7 +171,7 @@ const Header = ({ toggleSidebar }) => {
                 </div>
 
                 <div
-                  onClick={() => handleNavigation('/explore')}
+                  onClick={() => handleNavigation('/my-posts')}
                   className="relative flex items-center space-x-2 text-gray-700 hover:text-purple-600 transition-colors duration-200 py-1 px-3 rounded-full hover:bg-purple-50 group cursor-pointer"
                   onMouseEnter={() => setHoverNav('explore')}
                   onMouseLeave={() => setHoverNav(null)}
@@ -239,7 +239,7 @@ const Header = ({ toggleSidebar }) => {
                 <FiMenu className="w-5 h-5 text-gray-700" />
               </motion.button>
               <a
-                href={"https://github.com/rehmanNRY/SocialMediaApp/fork"}
+                href={"https://github.com"}
                 target='_blank'
                 className="p-2 rounded-full hover:bg-gray-100 transition-colors md:block hidden"
               >
