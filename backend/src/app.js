@@ -27,7 +27,9 @@ import saves from "./routes/saves.routes.js"
 import userRoute from "./routes/user.routes.js"
 import storyRoute from "./routes/story.routes.js"
 import chatRoute from "./routes/chat.routes.js"
+import authRoutes from './routes/auth.routes.js';
 
+app.use('/api/auth', authRoutes);
 app.use("/api/comments", commentRoute);
 app.use("/api/friendRequests", friendRoute);
 app.use("/api/posts", postRoute);
