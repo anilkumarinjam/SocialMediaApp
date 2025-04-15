@@ -8,7 +8,8 @@ import {
   getAllUsers,
   userDetails,
   updateUser,
-  getFriends
+  getFriends,
+  getSocialCounts
 } from '../controllers/user.controllers.js';
 
 
@@ -33,4 +34,5 @@ router.get('/', getAllUsers);
 // Route to update the user profile
 router.put('/update', fetchUser, updateUser); 
 
+router.get('/social-counts', fetchUser, getSocialCounts);
 export default router;

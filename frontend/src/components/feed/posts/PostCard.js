@@ -213,6 +213,7 @@ const PostCard = ({ post }) => {
 
       {/* Edit Post Modal */}
       <EditPostModal
+        key={post._id} 
         isOpen={showEditModal}
         onClose={() => setShowEditModal(false)}
         post={post}

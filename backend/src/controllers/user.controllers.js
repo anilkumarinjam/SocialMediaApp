@@ -157,6 +157,38 @@ export const getAllUsers = asyncHandler(async (req, res, next) => {
   res.status(200).json(new ApiResponse(200, 'All users fetched successfully', users));
 });
 
+export const getSocialCounts = asyncHandler(async (req, res, next) => {
+  const userId = req.user.id;
+
+  // Fetch the user to get the friends list
+  const user = await User.findById(userId).populate('friends', '_id');
+  if (!user) {
+    return next(new ApiError(404, 'User not found'));
+  }
+
+  // Count followers (users who sent friend requests to the logged-in user)
+  const followersCount = await FriendRequest.countDocuments({
+    receiver: userId,
+    status: 'pending', // Ensure you have a 'status' field in FriendRequest to track request state
+  });
+
+  // Count following (users to whom the logged-in user sent friend requests)
+  const followingCount = await FriendRequest.countDocuments({
+    sender: userId,
+    status: 'pending', // Ensure you have a 'status' field in FriendRequest to track request state
+  });
+
+  // Count friends (mutual acceptance)
+  const friendsCount = user.friends.length;
+
+  // Return the counts
+  res.status(200).json({
+    friends: friendsCount,
+    followers: followersCount,
+    following: followingCount,
+  });
+});
+
 // Update user profile
 export const updateUser = asyncHandler(async (req, res, next) => {
   const userId = req.user.id;

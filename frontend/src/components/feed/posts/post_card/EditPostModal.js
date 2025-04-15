@@ -18,7 +18,7 @@ const EditPostModal = ({ isOpen, onClose, post }) => {
 
   // Reset state when modal opens with new post
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && editContent === undefined) {
       setEditContent(post.content);
       setEditBackgroundColor(post.backgroundColor || 'bg-white');
       setCharCount(post.content.length);

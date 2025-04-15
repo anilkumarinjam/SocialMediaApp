@@ -58,6 +58,25 @@ const SettingsPage = () => {
     }
   }, [userDetails]);
 
+  const [socialCounts, setSocialCounts] = useState({ friends: 0, followers: 0, following: 0 });
+
+useEffect(() => {
+  const fetchSocialCounts = async () => {
+    try {
+      const authToken = localStorage.getItem("authToken");
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/user/social-counts`, {
+        headers: { "auth-token": authToken },
+      });
+      setSocialCounts(response.data);
+    } catch (error) {
+      console.error("Error fetching social counts:", error);
+    }
+  };
+
+  fetchSocialCounts();
+}, []);
+
+
   const handleEdit = (field) => {
     setActiveField(field);
   };
@@ -344,9 +363,9 @@ const SettingsPage = () => {
           </h2>
           <ul className="space-y-4">
             {[
-              { title: "Friends", icon: <FaUserPlus className="text-indigo-500" />, href: "/friends", count: "12" },
-              { title: "Followers", icon: <FaUserMinus className="text-indigo-500" />, href: "/pending-requests", count: "24" },
-              { title: "Following", icon: <FaUserFriends className="text-indigo-500" />, href: "/sent-requests", count: "18" },
+              { title: "Friends", icon: <FaUserPlus className="text-indigo-500" />, href: "/friends", count: socialCounts.friends },
+              { title: "Followers", icon: <FaUserMinus className="text-indigo-500" />, href: "/pending-requests", count: socialCounts.followers },
+              { title: "Following", icon: <FaUserFriends className="text-indigo-500" />, href: "/sent-requests", count: socialCounts.following },
             ].map((item, index) => (
               <motion.div
                 key={index}
