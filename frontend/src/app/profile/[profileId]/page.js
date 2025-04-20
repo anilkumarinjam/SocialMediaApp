@@ -121,7 +121,20 @@ const UserProfile = ({ params }) => {
       case 'Following':
         return <Following users={users} user={user} />;
       case 'Posts':
-        return <Posts userPosts={userPosts} loggedInUserId={loggedInUserId} user={user} usersList={false} />;
+        return (
+          <>
+            <Posts userPosts={userPosts} loggedInUserId={loggedInUserId} user={user} usersList={false} />
+            <div className="mt-6 p-4 bg-gray-100 rounded-lg shadow-md">
+              <h2 className="text-2xl font-semibold text-gray-800 mb-2">Deleted Posts</h2>
+              <p className="text-gray-600">You can view and restore your deleted posts by visiting the dedicated page.</p>
+              <Link href="/me/deleted-posts">
+                <button className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300">
+                  View Deleted Posts
+                </button>
+              </Link>
+            </div>
+          </>
+        );
       default:
         return null;
     }
@@ -274,7 +287,7 @@ const menuItems = [
   {
     label: 'Posts',
     icon: <FiUserPlus className="w-6 h-6 text-pink-500" />,
-  },
+  }
 ];
 
 export default UserProfile;

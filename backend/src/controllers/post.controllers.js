@@ -55,33 +55,20 @@ export const createPost = asyncHandler(async (req, res, next) => {
 });
 
 
-// Get all posts of all users along with comments and user details
+// Get all posts of all users (exclude deleted posts)
 export const getAllPosts = asyncHandler(async (req, res, next) => {
   try {
-    // Fetch all posts with populated user and likes fields
-    const posts = await Post.find()
+    const posts = await Post.find({ deleted: false })
       .populate('user', 'fullName profilePicture username')
       .populate('likes', 'fullName')
       .populate('poll.options.votes', 'fullName username profilePicture')
-      .lean(); // Use .lean() for better performance and mutability
+      .lean();
 
-    // Check if any polls have expired and update their active status
-    const now = new Date();
-    const updatedPosts = posts.map(post => {
-      if (post.poll && post.poll.endDate && post.poll.active) {
-        if (new Date(post.poll.endDate) < now) {
-          post.poll.active = false;
-        }
-      }
-      return post;
-    });
-
-    res.status(200).json(new ApiResponse(200, 'All posts fetched successfully', updatedPosts));
+    res.status(200).json(new ApiResponse(200, 'All posts fetched successfully', posts));
   } catch (error) {
     next(new ApiError(500, 'Failed to fetch posts'));
   }
 });
-
 
 // Edit own post
 export const editPost = asyncHandler(async (req, res, next) => {
@@ -110,21 +97,47 @@ export const editPost = asyncHandler(async (req, res, next) => {
   res.status(200).json(new ApiResponse(200, 'Post updated successfully', populatedPost));
 });
 
-// Delete own post
+// Delete own post (mark as deleted)
 export const deletePost = asyncHandler(async (req, res, next) => {
   const userId = req.user.id;
   const { postId } = req.params;
 
-  // Find the post and ensure it belongs to the logged-in user
-  const post = await Post.findOneAndDelete({ _id: postId, user: userId });
+  const post = await Post.findOne({ _id: postId, user: userId });
   if (!post) {
     return next(new ApiError(404, 'Post not found or you are not authorized to delete this post'));
   }
 
-  // Delete all comments associated with the deleted post
-  await Comment.deleteMany({ post: postId });
+  post.deleted = true;
+  await post.save();
 
-  res.status(200).json(new ApiResponse(200, 'Post and its comments deleted successfully'));
+  res.status(200).json(new ApiResponse(200, 'Post marked as deleted successfully'));
+});
+
+// Get deleted posts for a user
+export const getDeletedPosts = asyncHandler(async (req, res, next) => {
+  const userId = req.user.id;
+
+  const posts = await Post.find({ user: userId, deleted: true })
+    .populate('user', 'fullName profilePicture username')
+    .lean();
+
+  res.status(200).json(new ApiResponse(200, 'Deleted posts fetched successfully', posts));
+});
+
+// Restore a deleted post
+export const restorePost = asyncHandler(async (req, res, next) => {
+  const userId = req.user.id;
+  const { postId } = req.params;
+
+  const post = await Post.findOne({ _id: postId, user: userId });
+  if (!post || !post.deleted) {
+    return next(new ApiError(404, 'Post not found or not marked as deleted'));
+  }
+
+  post.deleted = false;
+  await post.save();
+
+  res.status(200).json(new ApiResponse(200, 'Post restored successfully'));
 });
 
 // Like or unlike a post

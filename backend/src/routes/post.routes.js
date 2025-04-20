@@ -9,7 +9,9 @@ import {
   toggleLikePost,
   getPostLikers,
   votePollOption,
-  getPollResults
+  getPollResults,
+  getDeletedPosts,
+  restorePost
 } from '../controllers/post.controllers.js';
 
 const router = express.Router();
@@ -37,5 +39,11 @@ router.post('/:postId/poll/:optionId/vote', fetchUser, votePollOption);
 
 // Route to get poll results
 router.get('/:postId/poll/results', getPollResults);
+
+// Route to get deleted posts for a user
+router.get('/deleted', fetchUser, getDeletedPosts);
+
+// Route to restore a deleted post
+router.put('/:postId/restore', fetchUser, restorePost);
 
 export default router;

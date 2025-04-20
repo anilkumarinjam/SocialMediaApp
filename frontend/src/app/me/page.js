@@ -70,6 +70,16 @@ const UserProfile = () => {
           </ul>
         </div>
 
+        {/* Add a button to navigate to Deleted Posts */}
+        <div className="text-center mt-4">
+          <button
+            onClick={() => router.push('/me/deleted-posts')}
+            className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-300"
+          >
+            View Deleted Posts
+          </button>
+        </div>
+
         {/* Friends List */}
         <div className="p-6 border-t border-gray-200">
           <h3 className="text-lg font-semibold text-gray-800 mb-4">Friends</h3>
